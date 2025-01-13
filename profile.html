@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Welcome, {{ user }}!</h2>
+<a href="/meet-people">Meet People</a> | <a href="/logout">Log Out</a>
+{% endblock %}
+
+meet_people.html
+
+{% extends "base.html" %}
+{% block content %}
+<h2>Meet People</h2>
+<ul>
+    {% for user in users %}
+        {% if user.username != current_user %}
+            <li>{{ user.username }} ({{ user.email_or_number }})</li>
+            <form action="/message/{{ user.id }}" method="POST">
+                <button type="submit">Message</button>
+            </form>
+        {% endif %}
+    {% endfor %}
+</ul>
+{% endblock %}
